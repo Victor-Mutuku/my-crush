@@ -1,193 +1,909 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>My crush🤞</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-    body {
-      margin: 0;
-      height: 100vh;
-      background: linear-gradient(135deg, #ffd6e8, #fff0f6);
-      font-family: Arial, sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      overflow: hidden;
+<title>Hey Crushie 💖</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    font-family: "Segoe UI", Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+
+    background:
+        radial-gradient(circle at top left, #ffd6e7, transparent 35%),
+        radial-gradient(circle at bottom right, #ffc1da, transparent 35%),
+        linear-gradient(135deg, #fff0f6, #ffdce9);
+
+    position: relative;
+}
+
+/* ---------------- CARD ---------------- */
+
+.card {
+    width: 92%;
+    max-width: 520px;
+    padding: 42px 30px 32px;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(12px);
+
+    border: 2px solid rgba(255,105,160,0.25);
+    border-radius: 30px;
+
+    text-align: center;
+
+    box-shadow:
+        0 20px 60px rgba(220,70,130,0.25),
+        inset 0 0 30px rgba(255,255,255,0.8);
+
+    position: relative;
+    z-index: 10;
+
+    animation: cardIn 1s ease;
+}
+
+@keyframes cardIn {
+    from {
+        opacity: 0;
+        transform: translateY(40px) scale(0.95);
     }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Decorative corners */
+
+.card::before,
+.card::after {
+    position: absolute;
+    font-size: 28px;
+}
+
+.card::before {
+    content: "🌸";
+    top: 15px;
+    left: 18px;
+}
+
+.card::after {
+    content: "🌸";
+    top: 15px;
+    right: 18px;
+}
+
+/* ---------------- TEXT ---------------- */
+
+h1 {
+    color: #ff4f91;
+    font-size: 2.2rem;
+    margin-bottom: 18px;
+}
+
+#message {
+    color: #555;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    margin-bottom: 22px;
+}
+
+h2 {
+    color: #e94f87;
+    font-size: 1.35rem;
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+
+/* ---------------- BUTTONS ---------------- */
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin: 25px 0;
+}
+
+button {
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 13px 25px;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+}
+
+#yesBtn {
+    color: white;
+    background: linear-gradient(135deg, #ff4f91, #ff76a8);
+    box-shadow: 0 8px 20px rgba(255,79,145,0.3);
+}
+
+#yesBtn:hover {
+    transform: scale(1.08);
+    box-shadow: 0 10px 25px rgba(255,79,145,0.45);
+}
+
+/* No button is intentionally disabled */
+
+#noBtn {
+    color: #777;
+    background: #eeeeee;
+    cursor: not-allowed;
+    opacity: 0.75;
+}
+
+#smallText {
+    color: #888;
+    font-size: 0.85rem;
+}
+
+/* ---------------- COUNTDOWN ---------------- */
+
+.countdown-title {
+    color: #ff6099;
+    font-size: 0.9rem;
+    margin-top: 25px;
+    margin-bottom: 10px;
+}
+
+.countdown {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.time-box {
+    background: #fff0f6;
+    border-radius: 12px;
+    padding: 8px 10px;
+    min-width: 55px;
+}
+
+.time-box strong {
+    display: block;
+    color: #ff4f91;
+    font-size: 1.2rem;
+}
+
+.time-box span {
+    font-size: 0.65rem;
+    color: #888;
+}
+
+/* ---------------- EXTRA BUTTONS ---------------- */
+
+.extra-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 15px;
+}
+
+.extra-btn {
+    background: #fff0f6;
+    color: #e94f87;
+    border: 1px solid #ffc3d9;
+    font-size: 0.85rem;
+    padding: 10px 17px;
+}
+
+.extra-btn:hover {
+    background: #ffe1ed;
+    transform: translateY(-2px);
+}
+
+/* ---------------- MUSIC ---------------- */
+
+.music-control {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+
+    z-index: 50;
+
+    background: rgba(255,255,255,0.9);
+    border: 1px solid #ffc2d8;
+
+    color: #e94f87;
+
+    padding: 10px 15px;
+    border-radius: 30px;
+
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+}
+
+/* ---------------- POPUP ---------------- */
+
+.overlay {
+    position: fixed;
+    inset: 0;
+
+    background: rgba(50,20,35,0.45);
+
+    display: none;
+    justify-content: center;
+    align-items: center;
+
+    z-index: 100;
+
+    padding: 20px;
+}
+
+.popup {
+    width: 90%;
+    max-width: 420px;
+
+    background: white;
+    padding: 30px;
+
+    border-radius: 25px;
+    text-align: center;
+
+    box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+
+    animation: popupIn 0.4s ease;
+}
+
+@keyframes popupIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.popup h2 {
+    margin-bottom: 20px;
+}
+
+.reason {
+    background: #fff1f6;
+    padding: 12px;
+    margin: 9px 0;
+    border-radius: 12px;
+    color: #555;
+}
+
+.close-btn {
+    margin-top: 18px;
+    background: #ff5d99;
+    color: white;
+}
+
+/* ---------------- FLOATING HEARTS ---------------- */
+
+.heart {
+    position: fixed;
+    bottom: -50px;
+
+    font-size: 20px;
+
+    animation: floatHeart linear infinite;
+
+    opacity: 0.7;
+
+    pointer-events: none;
+
+    z-index: 1;
+}
+
+@keyframes floatHeart {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+    }
+
+    15% {
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: translateY(-110vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* ---------------- SPARKLES ---------------- */
+
+.sparkle {
+    position: fixed;
+    pointer-events: none;
+    z-index: 3;
+
+    animation: sparkle 2s ease-out forwards;
+}
+
+@keyframes sparkle {
+    from {
+        opacity: 1;
+        transform: scale(0);
+    }
+
+    to {
+        opacity: 0;
+        transform: scale(1.8);
+    }
+}
+
+/* ---------------- YES SCREEN ---------------- */
+
+.success {
+    text-align: center;
+}
+
+.success h1 {
+    font-size: 2.5rem;
+}
+
+.success p {
+    color: #555;
+    font-size: 1.1rem;
+    line-height: 1.7;
+    margin-top: 15px;
+}
+
+/* ---------------- MOBILE ---------------- */
+
+@media (max-width: 480px) {
 
     .card {
-      background: white;
-      width: 90%;
-      max-width: 380px;
-      padding: 35px 25px;
-      border-radius: 25px;
-      text-align: center;
-      box-shadow: 0 20px 50px rgba(255, 79, 154, 0.25);
-      position: relative;
-    }
-
-    .heart {
-      font-size: 45px;
-      animation: beat 1s infinite;
+        padding: 38px 20px 25px;
     }
 
     h1 {
-      color: #ff4f9a;
-      margin-bottom: 10px;
+        font-size: 1.9rem;
     }
 
     h2 {
-      color: #333;
-      margin-top: 25px;
-      font-size: 21px;
+        font-size: 1.15rem;
     }
 
-    p {
-      color: #444;
-      font-size: 17px;
-      line-height: 1.5;
+    .countdown {
+        gap: 5px;
     }
 
-    .buttons {
-      margin-top: 25px;
-      height: 80px;
-      position: relative;
+    .time-box {
+        min-width: 48px;
+        padding: 7px;
     }
 
-    button {
-      border: none;
-      padding: 13px 28px;
-      border-radius: 30px;
-      font-size: 16px;
-      cursor: pointer;
-      transition: 0.2s ease;
+    .time-box strong {
+        font-size: 1rem;
     }
-
-    #yesBtn {
-      background: #ff4f9a;
-      color: white;
-      margin-right: 15px;
-    }
-
-    #yesBtn:hover {
-      transform: scale(1.1);
-      background: #ff2f86;
-    }
-
-    #noBtn {
-      background: #eeeeee;
-      color: #333;
-      position: absolute;
-    }
-
-    #smallText {
-      font-size: 14px;
-      color: #999;
-      margin-top: 5px;
-    }
-
-    .hidden {
-      display: none;
-    }
-
-    @keyframes beat {
-      0%, 100% {
-        transform: scale(1);
-      }
-
-      50% {
-        transform: scale(1.25);
-      }
-    }
-  </style>
+}
+</style>
 </head>
 
 <body>
-  <div class="card">
-    <div class="heart">❤</div>
 
-    <h1>Hey Crushie</h1>
+<!-- ================= MUSIC ================= -->
+
+<audio id="loveSong" loop>
+    <source src="audio/CHAI YA SAA KUMI.mp3" type="audio/mpeg">
+</audio>
+
+<button class="music-control" id="musicBtn">
+    🎵 Play Music
+</button>
+
+
+<!-- ================= MAIN CARD ================= -->
+
+<div class="card" id="mainCard">
+
+    <h1>Hey Crushie 🥹💖</h1>
 
     <p id="message">
-       Since this is a website, I guess for me it was love at first site😝
+        Since this is a website, I guess for me it was
+        <strong>love at first site</strong> 😝✨
     </p>
 
-    <h2>Wanna hang out with me today and kiss me?</h2>
+    <h2>
+        Wanna hang out with me today? 🌸<br>
+        ...and maybe give me a kiss? 😘💕
+    </h2>
 
     <div class="buttons">
-      <button id="yesBtn">Yes 😊</button>
-      <button id="noBtn">No 😭</button>
+
+        <button id="yesBtn">
+            Yes 😊💖
+        </button>
+
+        <!-- Completely unclickable -->
+        <button id="noBtn" disabled>
+            No 😭
+        </button>
+
     </div>
 
-    <p id="smallText">Kumbuka nakaa poa before you pick No😂</p>
-  </div>
+    <p id="smallText">
+        Kumbuka nakaa poa before you pick No 😂💕
+    </p>
 
-  <script>
-    const yesBtn = document.getElementById("yesBtn");
-    const noBtn = document.getElementById("noBtn");
-    const smallText = document.getElementById("smallText");
 
-    let noCount = 0;
+    <!-- COUNTDOWN -->
 
-    function moveNoButton() {
-      noCount++;
+    <p class="countdown-title">
+        ⏳ Until our little date...
+    </p>
 
-      const maxX = window.innerWidth - noBtn.offsetWidth - 30;
-      const maxY = window.innerHeight - noBtn.offsetHeight - 30;
+    <div class="countdown">
 
-      const randomX = Math.floor(Math.random() * maxX);
-      const randomY = Math.floor(Math.random() * maxY);
+        <div class="time-box">
+            <strong id="days">00</strong>
+            <span>DAYS</span>
+        </div>
 
-      noBtn.style.position = "fixed";
-      noBtn.style.left = randomX + "px";
-      noBtn.style.top = randomY + "px";
+        <div class="time-box">
+            <strong id="hours">00</strong>
+            <span>HOURS</span>
+        </div>
 
-      if (noCount === 1) {
-        smallText.textContent = "Mbona unakimbilia No😂";
-      } else if (noCount === 2) {
-        smallText.textContent = "No button is shy, try Yes instead 😂";
-      } else if (noCount === 3) {
-        smallText.textContent = "No pia inaona ni fate, finya yes 😂";
-      } else if (noCount === 4) {
-        smallText.textContent = "achana na no😂";
-      } else {
-        smallText.textContent = "No imejam, just pick yes😁";
-      }
+        <div class="time-box">
+            <strong id="minutes">00</strong>
+            <span>MIN</span>
+        </div>
+
+        <div class="time-box">
+            <strong id="seconds">00</strong>
+            <span>SEC</span>
+        </div>
+
+    </div>
+
+
+    <!-- EXTRA OPTIONS -->
+
+    <div class="extra-buttons">
+
+        <button class="extra-btn" id="reasonsBtn">
+            💌 Why I Like You
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- ================= REASONS POPUP ================= -->
+
+<div class="overlay" id="overlay">
+
+    <div class="popup">
+
+        <h2>
+            💌 A Few Reasons...
+        </h2>
+
+        <div class="reason">
+            🥹 You have this way of making me smile.
+        </div>
+
+        <div class="reason">
+            🌸 You're genuinely special to me.
+        </div>
+
+        <div class="reason">
+            😂 You make ordinary moments feel fun.
+        </div>
+
+        <div class="reason">
+            💖 I just really enjoy being around you.
+        </div>
+
+        <div class="reason">
+            😘 And honestly... you're kinda kissable.
+        </div>
+
+        <button class="close-btn" id="closeBtn">
+            Okay, enough blushing 😭💕
+        </button>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* =====================================================
+   MUSIC
+===================================================== */
+
+const song = document.getElementById("loveSong");
+const musicBtn = document.getElementById("musicBtn");
+
+musicBtn.addEventListener("click", () => {
+
+    if (song.paused) {
+
+        song.play();
+
+        musicBtn.innerHTML = "⏸️ Pause Music";
+
+    } else {
+
+        song.pause();
+
+        musicBtn.innerHTML = "🎵 Play Music";
+
     }
 
-    noBtn.addEventListener("mouseover", moveNoButton);
-    noBtn.addEventListener("touchstart", moveNoButton);
+});
 
-    yesBtn.addEventListener("click", () => {
-      document.body.innerHTML = `
-        <div style="
-          height: 100vh;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          background: linear-gradient(135deg, #ffd6e8, #fff0f6);
-          font-family: Arial, sans-serif;
-          text-align: center;
-          padding: 20px;
-        ">
-          <div style="
-            background: white;
-            width: 90%;
-            max-width: 380px;
-            padding: 35px 25px;
-            border-radius: 25px;
-            box-shadow: 0 20px 50px rgba(255, 79, 154, 0.25);
-          ">
-            <div style="font-size:45px; animation: beat 1s infinite;">😊💖</div>
-            <h1 style="color:#ff4f9a;">Yay!😊</h1>
-            <p style="font-size:18px; color:#444;">Knew you liked me too!</p>
-            <h2 style="color:#333;">so tunameet lini?</h2>
-          </div>
-        </div>
-      `;
-    });
-  </script>
+
+/*
+   Browsers usually block autoplay with sound.
+
+   We therefore start the music after the first
+   interaction with the page.
+*/
+
+document.body.addEventListener("click", () => {
+
+    if (song.paused) {
+        song.play().catch(() => {});
+    }
+
+}, { once: true });
+
+
+/* =====================================================
+   COUNTDOWN
+===================================================== */
+
+/*
+   August 10, 2026 at 15:00 EAT
+   Kenya = UTC+3
+*/
+
+const dateTarget =
+    new Date("2026-08-10T15:00:00+03:00").getTime();
+
+
+function updateCountdown() {
+
+    const now = new Date().getTime();
+
+    const difference = dateTarget - now;
+
+
+    if (difference <= 0) {
+
+        document.getElementById("days").innerText = "00";
+        document.getElementById("hours").innerText = "00";
+        document.getElementById("minutes").innerText = "00";
+        document.getElementById("seconds").innerText = "00";
+
+        document.querySelector(".countdown-title").innerHTML =
+            "💕 It's time!";
+
+        return;
+    }
+
+
+    const days =
+        Math.floor(difference / (1000 * 60 * 60 * 24));
+
+    const hours =
+        Math.floor(
+            (difference / (1000 * 60 * 60)) % 24
+        );
+
+    const minutes =
+        Math.floor(
+            (difference / (1000 * 60)) % 60
+        );
+
+    const seconds =
+        Math.floor(
+            (difference / 1000) % 60
+        );
+
+
+    document.getElementById("days").innerText =
+        String(days).padStart(2, "0");
+
+    document.getElementById("hours").innerText =
+        String(hours).padStart(2, "0");
+
+    document.getElementById("minutes").innerText =
+        String(minutes).padStart(2, "0");
+
+    document.getElementById("seconds").innerText =
+        String(seconds).padStart(2, "0");
+}
+
+
+updateCountdown();
+
+setInterval(updateCountdown, 1000);
+
+
+/* =====================================================
+   REASONS POPUP
+===================================================== */
+
+const reasonsBtn =
+    document.getElementById("reasonsBtn");
+
+const overlay =
+    document.getElementById("overlay");
+
+const closeBtn =
+    document.getElementById("closeBtn");
+
+
+reasonsBtn.addEventListener("click", () => {
+
+    overlay.style.display = "flex";
+
+});
+
+
+closeBtn.addEventListener("click", () => {
+
+    overlay.style.display = "none";
+
+});
+
+
+/* Close popup when clicking outside */
+
+overlay.addEventListener("click", (event) => {
+
+    if (event.target === overlay) {
+
+        overlay.style.display = "none";
+
+    }
+
+});
+
+
+/* =====================================================
+   YES BUTTON
+===================================================== */
+
+const yesBtn =
+    document.getElementById("yesBtn");
+
+
+yesBtn.addEventListener("click", () => {
+
+    createConfetti();
+
+    setTimeout(() => {
+
+        document.getElementById("mainCard").innerHTML = `
+
+            <div class="success">
+
+                <h1>
+                    YAAAY! 😭💖🎉
+                </h1>
+
+                <h2>
+                    I knew you had good taste 😌💕
+                </h2>
+
+                <p>
+                    You just made my day. 🥹🌸
+                </p>
+
+                <p>
+                    So it's a date then... 😘
+                </p>
+
+                <p>
+                    And I'm definitely saving that kiss. 💋❤️
+                </p>
+
+                <div style="
+                    font-size: 3rem;
+                    margin-top: 20px;
+                ">
+                    🥰💖🌸💋
+                </div>
+
+            </div>
+        `;
+
+    }, 500);
+
+});
+
+
+/* =====================================================
+   CONFETTI
+===================================================== */
+
+function createConfetti() {
+
+    const emojis = [
+        "💖",
+        "💕",
+        "💗",
+        "💓",
+        "💘",
+        "🌸",
+        "✨",
+        "🎉",
+        "🥰"
+    ];
+
+
+    for (let i = 0; i < 100; i++) {
+
+        const piece =
+            document.createElement("div");
+
+        piece.innerText =
+            emojis[
+                Math.floor(
+                    Math.random() * emojis.length
+                )
+            ];
+
+        piece.style.position = "fixed";
+
+        piece.style.left =
+            Math.random() * 100 + "vw";
+
+        piece.style.top = "-30px";
+
+        piece.style.fontSize =
+            (15 + Math.random() * 20) + "px";
+
+        piece.style.zIndex = "200";
+
+        piece.style.pointerEvents = "none";
+
+        piece.style.transition =
+            "transform 3s linear, opacity 3s linear";
+
+        document.body.appendChild(piece);
+
+
+        setTimeout(() => {
+
+            piece.style.transform =
+                `translateY(${window.innerHeight + 100}px)
+                 rotate(${Math.random() * 1000}deg)`;
+
+            piece.style.opacity = "0";
+
+        }, 50);
+
+
+        setTimeout(() => {
+
+            piece.remove();
+
+        }, 3200);
+
+    }
+
+}
+
+
+/* =====================================================
+   FLOATING HEARTS
+===================================================== */
+
+const heartTypes = [
+    "💖",
+    "💕",
+    "💗",
+    "💓",
+    "💘",
+    "🌸"
+];
+
+
+function createHeart() {
+
+    const heart =
+        document.createElement("div");
+
+    heart.className = "heart";
+
+    heart.innerText =
+        heartTypes[
+            Math.floor(
+                Math.random() * heartTypes.length
+            )
+        ];
+
+
+    heart.style.left =
+        Math.random() * 100 + "vw";
+
+
+    heart.style.fontSize =
+        (15 + Math.random() * 25) + "px";
+
+
+    const duration =
+        5 + Math.random() * 6;
+
+    heart.style.animationDuration =
+        duration + "s";
+
+
+    document.body.appendChild(heart);
+
+
+    setTimeout(() => {
+
+        heart.remove();
+
+    }, duration * 1000);
+
+}
+
+
+setInterval(createHeart, 500);
+
+
+/* =====================================================
+   SPARKLES WHEN CLICKING
+===================================================== */
+
+document.addEventListener("click", (event) => {
+
+    for (let i = 0; i < 3; i++) {
+
+        const sparkle =
+            document.createElement("div");
+
+        sparkle.className = "sparkle";
+
+        sparkle.innerText = "✨";
+
+        sparkle.style.left =
+            event.clientX +
+            (Math.random() * 40 - 20) +
+            "px";
+
+        sparkle.style.top =
+            event.clientY +
+            (Math.random() * 40 - 20) +
+            "px";
+
+        document.body.appendChild(sparkle);
+
+
+        setTimeout(() => {
+
+            sparkle.remove();
+
+        }, 2000);
+
+    }
+
+});
+
+</script>
+
 </body>
 </html>
