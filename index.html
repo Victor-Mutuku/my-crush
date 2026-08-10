@@ -136,13 +136,18 @@ button {
     box-shadow: 0 10px 25px rgba(255,79,145,0.45);
 }
 
-/* No button is intentionally disabled */
+/* Moving No button */
 
 #noBtn {
     color: #777;
     background: #eeeeee;
-    cursor: not-allowed;
-    opacity: 0.75;
+    cursor: pointer;
+    transition: left 0.25s ease, top 0.25s ease, transform 0.2s ease;
+    position: relative;
+}
+
+#noBtn:hover {
+    transform: scale(0.95);
 }
 
 #smallText {
@@ -398,7 +403,7 @@ button {
 <!-- ================= MUSIC ================= -->
 
 <audio id="loveSong" loop>
-    <source src="audio/CHAI YA SAA KUMI.mp3" type="audio/mpeg">
+    <source src="audio/CHAI YA SAA KUMI      -YWAYA TAJIRI.mp3" type="audio/mpeg">
 </audio>
 
 <button class="music-control" id="musicBtn">
