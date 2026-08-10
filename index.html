@@ -1,914 +1,907 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Hey Crushie 💖</title>
-
-<style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    min-height: 100vh;
-    font-family: "Segoe UI", Arial, sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-
-    background:
-        radial-gradient(circle at top left, #ffd6e7, transparent 35%),
-        radial-gradient(circle at bottom right, #ffc1da, transparent 35%),
-        linear-gradient(135deg, #fff0f6, #ffdce9);
-
-    position: relative;
-}
-
-/* ---------------- CARD ---------------- */
-
-.card {
-    width: 92%;
-    max-width: 520px;
-    padding: 42px 30px 32px;
-    background: rgba(255,255,255,0.92);
-    backdrop-filter: blur(12px);
-
-    border: 2px solid rgba(255,105,160,0.25);
-    border-radius: 30px;
-
-    text-align: center;
-
-    box-shadow:
-        0 20px 60px rgba(220,70,130,0.25),
-        inset 0 0 30px rgba(255,255,255,0.8);
-
-    position: relative;
-    z-index: 10;
-
-    animation: cardIn 1s ease;
-}
-
-@keyframes cardIn {
-    from {
-        opacity: 0;
-        transform: translateY(40px) scale(0.95);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-    }
-}
-
-/* Decorative corners */
-
-.card::before,
-.card::after {
-    position: absolute;
-    font-size: 28px;
-}
-
-.card::before {
-    content: "🌸";
-    top: 15px;
-    left: 18px;
-}
-
-.card::after {
-    content: "🌸";
-    top: 15px;
-    right: 18px;
-}
-
-/* ---------------- TEXT ---------------- */
-
-h1 {
-    color: #ff4f91;
-    font-size: 2.2rem;
-    margin-bottom: 18px;
-}
-
-#message {
-    color: #555;
-    font-size: 1.05rem;
-    line-height: 1.7;
-    margin-bottom: 22px;
-}
-
-h2 {
-    color: #e94f87;
-    font-size: 1.35rem;
-    line-height: 1.6;
-    margin-bottom: 25px;
-}
-
-/* ---------------- BUTTONS ---------------- */
-
-.buttons {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    margin: 25px 0;
-}
-
-button {
-    border: none;
-    cursor: pointer;
-    font-size: 1rem;
-    padding: 13px 25px;
-    border-radius: 50px;
-    transition: all 0.3s ease;
-}
-
-#yesBtn {
-    color: white;
-    background: linear-gradient(135deg, #ff4f91, #ff76a8);
-    box-shadow: 0 8px 20px rgba(255,79,145,0.3);
-}
-
-#yesBtn:hover {
-    transform: scale(1.08);
-    box-shadow: 0 10px 25px rgba(255,79,145,0.45);
-}
-
-/* Moving No button */
-
-#noBtn {
-    color: #777;
-    background: #eeeeee;
-    cursor: pointer;
-    transition: left 0.25s ease, top 0.25s ease, transform 0.2s ease;
-    position: relative;
-}
-
-#noBtn:hover {
-    transform: scale(0.95);
-}
-
-#smallText {
-    color: #888;
-    font-size: 0.85rem;
-}
-
-/* ---------------- COUNTDOWN ---------------- */
-
-.countdown-title {
-    color: #ff6099;
-    font-size: 0.9rem;
-    margin-top: 25px;
-    margin-bottom: 10px;
-}
-
-.countdown {
-    display: flex;
-    justify-content: center;
-    gap: 8px;
-    margin-bottom: 20px;
-}
-
-.time-box {
-    background: #fff0f6;
-    border-radius: 12px;
-    padding: 8px 10px;
-    min-width: 55px;
-}
-
-.time-box strong {
-    display: block;
-    color: #ff4f91;
-    font-size: 1.2rem;
-}
-
-.time-box span {
-    font-size: 0.65rem;
-    color: #888;
-}
-
-/* ---------------- EXTRA BUTTONS ---------------- */
-
-.extra-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    flex-wrap: wrap;
-    margin-top: 15px;
-}
-
-.extra-btn {
-    background: #fff0f6;
-    color: #e94f87;
-    border: 1px solid #ffc3d9;
-    font-size: 0.85rem;
-    padding: 10px 17px;
-}
-
-.extra-btn:hover {
-    background: #ffe1ed;
-    transform: translateY(-2px);
-}
-
-/* ---------------- MUSIC ---------------- */
-
-.music-control {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-
-    z-index: 50;
-
-    background: rgba(255,255,255,0.9);
-    border: 1px solid #ffc2d8;
-
-    color: #e94f87;
-
-    padding: 10px 15px;
-    border-radius: 30px;
-
-    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-}
-
-/* ---------------- POPUP ---------------- */
-
-.overlay {
-    position: fixed;
-    inset: 0;
-
-    background: rgba(50,20,35,0.45);
-
-    display: none;
-    justify-content: center;
-    align-items: center;
-
-    z-index: 100;
-
-    padding: 20px;
-}
-
-.popup {
-    width: 90%;
-    max-width: 420px;
-
-    background: white;
-    padding: 30px;
-
-    border-radius: 25px;
-    text-align: center;
-
-    box-shadow: 0 20px 60px rgba(0,0,0,0.25);
-
-    animation: popupIn 0.4s ease;
-}
-
-@keyframes popupIn {
-    from {
-        opacity: 0;
-        transform: scale(0.8);
-    }
-
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
-
-.popup h2 {
-    margin-bottom: 20px;
-}
-
-.reason {
-    background: #fff1f6;
-    padding: 12px;
-    margin: 9px 0;
-    border-radius: 12px;
-    color: #555;
-}
-
-.close-btn {
-    margin-top: 18px;
-    background: #ff5d99;
-    color: white;
-}
-
-/* ---------------- FLOATING HEARTS ---------------- */
-
-.heart {
-    position: fixed;
-    bottom: -50px;
-
-    font-size: 20px;
-
-    animation: floatHeart linear infinite;
-
-    opacity: 0.7;
-
-    pointer-events: none;
-
-    z-index: 1;
-}
-
-@keyframes floatHeart {
-    0% {
-        transform: translateY(0) rotate(0deg);
-        opacity: 0;
-    }
-
-    15% {
-        opacity: 0.8;
-    }
-
-    100% {
-        transform: translateY(-110vh) rotate(360deg);
-        opacity: 0;
-    }
-}
-
-/* ---------------- SPARKLES ---------------- */
-
-.sparkle {
-    position: fixed;
-    pointer-events: none;
-    z-index: 3;
-
-    animation: sparkle 2s ease-out forwards;
-}
-
-@keyframes sparkle {
-    from {
-        opacity: 1;
-        transform: scale(0);
-    }
-
-    to {
-        opacity: 0;
-        transform: scale(1.8);
-    }
-}
-
-/* ---------------- YES SCREEN ---------------- */
-
-.success {
-    text-align: center;
-}
-
-.success h1 {
-    font-size: 2.5rem;
-}
-
-.success p {
-    color: #555;
-    font-size: 1.1rem;
-    line-height: 1.7;
-    margin-top: 15px;
-}
-
-/* ---------------- MOBILE ---------------- */
-
-@media (max-width: 480px) {
-
-    .card {
-        padding: 38px 20px 25px;
-    }
-
-    h1 {
-        font-size: 1.9rem;
-    }
-
-    h2 {
-        font-size: 1.15rem;
-    }
-
-    .countdown {
-        gap: 5px;
-    }
-
-    .time-box {
-        min-width: 48px;
-        padding: 7px;
-    }
-
-    .time-box strong {
-        font-size: 1rem;
-    }
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Hey Crushie 💖</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: "Segoe UI", Arial, sans-serif;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            overflow: hidden;
+            position: relative;
+
+            background:
+                radial-gradient(circle at top left, #ffd6e7, transparent 35%),
+                radial-gradient(circle at bottom right, #ffc1da, transparent 35%),
+                linear-gradient(135deg, #fff0f6, #ffdce9);
+        }
+
+        /* ================= CARD ================= */
+
+        .card {
+            width: 92%;
+            max-width: 520px;
+
+            padding: 42px 30px 32px;
+
+            background: rgba(255, 255, 255, 0.94);
+            backdrop-filter: blur(12px);
+
+            border: 2px solid rgba(255, 105, 160, 0.25);
+            border-radius: 30px;
+
+            text-align: center;
+
+            box-shadow:
+                0 20px 60px rgba(220, 70, 130, 0.25),
+                inset 0 0 30px rgba(255, 255, 255, 0.8);
+
+            position: relative;
+            z-index: 10;
+
+            animation: cardIn 1s ease;
+        }
+
+        @keyframes cardIn {
+            from {
+                opacity: 0;
+                transform: translateY(40px) scale(0.95);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .card::before {
+            content: "🌸";
+            position: absolute;
+            top: 15px;
+            left: 18px;
+            font-size: 28px;
+        }
+
+        .card::after {
+            content: "🌸";
+            position: absolute;
+            top: 15px;
+            right: 18px;
+            font-size: 28px;
+        }
+
+        /* ================= TEXT ================= */
+
+        h1 {
+            color: #ff4f91;
+            font-size: 2.2rem;
+            margin-bottom: 18px;
+        }
+
+        #message {
+            color: #555;
+            font-size: 1.05rem;
+            line-height: 1.7;
+            margin-bottom: 22px;
+        }
+
+        h2 {
+            color: #e94f87;
+            font-size: 1.35rem;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        /* ================= BUTTONS ================= */
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 25px 0;
+        }
+
+        button {
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            padding: 13px 25px;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+        }
+
+        #yesBtn {
+            color: white;
+            background: linear-gradient(135deg, #ff4f91, #ff76a8);
+            box-shadow: 0 8px 20px rgba(255, 79, 145, 0.3);
+        }
+
+        #yesBtn:hover {
+            transform: scale(1.08);
+        }
+
+        /* MOVING NO BUTTON */
+
+        #noBtn {
+            color: #777;
+            background: #eeeeee;
+            cursor: pointer;
+
+            position: relative;
+
+            transition:
+                left 0.25s ease,
+                top 0.25s ease,
+                transform 0.2s ease;
+        }
+
+        #noBtn:hover {
+            transform: scale(0.95);
+        }
+
+        #smallText {
+            color: #888;
+            font-size: 0.85rem;
+        }
+
+        /* ================= COUNTDOWN ================= */
+
+        .countdown-title {
+            color: #ff6099;
+            font-size: 0.9rem;
+            margin-top: 25px;
+            margin-bottom: 10px;
+        }
+
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .time-box {
+            background: #fff0f6;
+            border-radius: 12px;
+            padding: 8px 10px;
+            min-width: 55px;
+        }
+
+        .time-box strong {
+            display: block;
+            color: #ff4f91;
+            font-size: 1.2rem;
+        }
+
+        .time-box span {
+            font-size: 0.65rem;
+            color: #888;
+        }
+
+        /* ================= EXTRA BUTTON ================= */
+
+        .extra-buttons {
+            display: flex;
+            justify-content: center;
+            margin-top: 15px;
+        }
+
+        .extra-btn {
+            background: #fff0f6;
+            color: #e94f87;
+            border: 1px solid #ffc3d9;
+            font-size: 0.85rem;
+            padding: 10px 17px;
+        }
+
+        .extra-btn:hover {
+            background: #ffe1ed;
+            transform: translateY(-2px);
+        }
+
+        /* ================= MUSIC ================= */
+
+        .music-control {
+            position: fixed;
+
+            bottom: 20px;
+            right: 20px;
+
+            z-index: 50;
+
+            background: rgba(255, 255, 255, 0.95);
+            color: #e94f87;
+
+            border: 1px solid #ffc2d8;
+            border-radius: 30px;
+
+            padding: 10px 16px;
+
+            cursor: pointer;
+
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .music-control:hover {
+            transform: scale(1.05);
+        }
+
+        /* ================= POPUP ================= */
+
+        .overlay {
+            position: fixed;
+            inset: 0;
+
+            background: rgba(50, 20, 35, 0.45);
+
+            display: none;
+            justify-content: center;
+            align-items: center;
+
+            z-index: 100;
+
+            padding: 20px;
+        }
+
+        .popup {
+            width: 90%;
+            max-width: 420px;
+
+            background: white;
+
+            padding: 30px;
+
+            border-radius: 25px;
+
+            text-align: center;
+
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+
+            animation: popupIn 0.4s ease;
+        }
+
+        @keyframes popupIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .popup h2 {
+            margin-bottom: 20px;
+        }
+
+        .reason {
+            background: #fff1f6;
+            padding: 12px;
+            margin: 9px 0;
+            border-radius: 12px;
+            color: #555;
+        }
+
+        .close-btn {
+            margin-top: 18px;
+            background: #ff5d99;
+            color: white;
+        }
+
+        /* ================= FLOATING HEARTS ================= */
+
+        .heart {
+            position: fixed;
+
+            bottom: -50px;
+
+            font-size: 20px;
+
+            animation: floatHeart linear infinite;
+
+            opacity: 0.7;
+
+            pointer-events: none;
+
+            z-index: 1;
+        }
+
+        @keyframes floatHeart {
+
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+
+            15% {
+                opacity: 0.8;
+            }
+
+            100% {
+                transform: translateY(-110vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* ================= SUCCESS ================= */
+
+        .success {
+            text-align: center;
+        }
+
+        .success h1 {
+            font-size: 2.5rem;
+        }
+
+        .success p {
+            color: #555;
+            font-size: 1.1rem;
+            line-height: 1.7;
+            margin-top: 15px;
+        }
+
+        /* ================= MOBILE ================= */
+
+        @media (max-width: 480px) {
+
+            .card {
+                padding: 38px 20px 25px;
+            }
+
+            h1 {
+                font-size: 1.9rem;
+            }
+
+            h2 {
+                font-size: 1.15rem;
+            }
+
+            .countdown {
+                gap: 5px;
+            }
+
+            .time-box {
+                min-width: 48px;
+                padding: 7px;
+            }
+
+            .time-box strong {
+                font-size: 1rem;
+            }
+        }
+    </style>
 </head>
+
 
 <body>
 
-<!-- ================= MUSIC ================= -->
+    <!-- ================= MUSIC ================= -->
 
-<audio id="loveSong" loop>
-    <source src="audio/CHAI YA SAA KUMI      -YWAYA TAJIRI.mp3" type="audio/mpeg">
-</audio>
+    <audio id="loveSong" loop>
+        <source src="audio/.mp3" type="audio/mpeg">
+    </audio>
 
-<button class="music-control" id="musicBtn">
-    🎵 Play Music
-</button>
-
-
-<!-- ================= MAIN CARD ================= -->
-
-<div class="card" id="mainCard">
-
-    <h1>Hey Crushie 🥹💖</h1>
-
-    <p id="message">
-        Since this is a website, I guess for me it was
-        <strong>love at first site</strong> 😝✨
-    </p>
-
-    <h2>
-        Wanna hang out with me today? 🌸<br>
-        ...and maybe give me a kiss? 😘💕
-    </h2>
-
-    <div class="buttons">
-
-        <button id="yesBtn">
-            Yes 😊💖
-        </button>
-
-        <!-- Completely unclickable -->
-        <button id="noBtn" disabled>
-            No 😭
-        </button>
-
-    </div>
-
-    <p id="smallText">
-        Kumbuka nakaa poa before you pick No 😂💕
-    </p>
+    <button class="music-control" id="musicBtn">
+        🎵 Play Music
+    </button>
 
 
-    <!-- COUNTDOWN -->
+    <!-- ================= MAIN CARD ================= -->
 
-    <p class="countdown-title">
-        ⏳ Until our little date...
-    </p>
+    <div class="card" id="mainCard">
 
-    <div class="countdown">
+        <h1>Hey Crushie 🥹💖</h1>
 
-        <div class="time-box">
-            <strong id="days">00</strong>
-            <span>DAYS</span>
-        </div>
-
-        <div class="time-box">
-            <strong id="hours">00</strong>
-            <span>HOURS</span>
-        </div>
-
-        <div class="time-box">
-            <strong id="minutes">00</strong>
-            <span>MIN</span>
-        </div>
-
-        <div class="time-box">
-            <strong id="seconds">00</strong>
-            <span>SEC</span>
-        </div>
-
-    </div>
-
-
-    <!-- EXTRA OPTIONS -->
-
-    <div class="extra-buttons">
-
-        <button class="extra-btn" id="reasonsBtn">
-            💌 Why I Like You
-        </button>
-
-    </div>
-
-</div>
-
-
-<!-- ================= REASONS POPUP ================= -->
-
-<div class="overlay" id="overlay">
-
-    <div class="popup">
+        <p id="message">
+            Since this is a website, I guess for me it was
+            <strong>love at first site</strong> 😝✨
+        </p>
 
         <h2>
-            💌 A Few Reasons...
+            Wanna hang out with me today? 🌸<br>
+            ...and maybe give me a kiss? 😘💕
         </h2>
 
-        <div class="reason">
-            🥹 You have this way of making me smile.
+        <div class="buttons">
+
+            <button id="yesBtn">
+                Yes 😊💖
+            </button>
+
+            <button id="noBtn">
+                No 😭
+            </button>
+
         </div>
 
-        <div class="reason">
-            🌸 You're genuinely special to me.
+        <p id="smallText">
+            Kumbuka nakaa poa before you pick No 😂💕
+        </p>
+
+
+        <!-- COUNTDOWN -->
+
+        <p class="countdown-title">
+            ⏳ Until our little date...
+        </p>
+
+        <div class="countdown">
+
+            <div class="time-box">
+                <strong id="days">00</strong>
+                <span>DAYS</span>
+            </div>
+
+            <div class="time-box">
+                <strong id="hours">00</strong>
+                <span>HOURS</span>
+            </div>
+
+            <div class="time-box">
+                <strong id="minutes">00</strong>
+                <span>MIN</span>
+            </div>
+
+            <div class="time-box">
+                <strong id="seconds">00</strong>
+                <span>SEC</span>
+            </div>
+
         </div>
 
-        <div class="reason">
-            😂 You make ordinary moments feel fun.
-        </div>
 
-        <div class="reason">
-            💖 I just really enjoy being around you.
-        </div>
+        <!-- REASONS -->
 
-        <div class="reason">
-            😘 And honestly... you're kinda kissable.
-        </div>
+        <div class="extra-buttons">
 
-        <button class="close-btn" id="closeBtn">
-            Okay, enough blushing 😭💕
-        </button>
+            <button class="extra-btn" id="reasonsBtn">
+                💌 Why I Like You
+            </button>
+
+        </div>
 
     </div>
 
-</div>
 
+    <!-- ================= REASONS POPUP ================= -->
 
-<script>
+    <div class="overlay" id="overlay">
 
-/* =====================================================
-   MUSIC
-===================================================== */
+        <div class="popup">
 
-const song = document.getElementById("loveSong");
-const musicBtn = document.getElementById("musicBtn");
+            <h2>
+                💌 A Few Reasons...
+            </h2>
 
-musicBtn.addEventListener("click", () => {
-
-    if (song.paused) {
-
-        song.play();
-
-        musicBtn.innerHTML = "⏸️ Pause Music";
-
-    } else {
-
-        song.pause();
-
-        musicBtn.innerHTML = "🎵 Play Music";
-
-    }
-
-});
-
-
-/*
-   Browsers usually block autoplay with sound.
-
-   We therefore start the music after the first
-   interaction with the page.
-*/
-
-document.body.addEventListener("click", () => {
-
-    if (song.paused) {
-        song.play().catch(() => {});
-    }
-
-}, { once: true });
-
-
-/* =====================================================
-   COUNTDOWN
-===================================================== */
-
-/*
-   August 10, 2026 at 15:00 EAT
-   Kenya = UTC+3
-*/
-
-const dateTarget =
-    new Date("2026-08-10T15:00:00+03:00").getTime();
-
-
-function updateCountdown() {
-
-    const now = new Date().getTime();
-
-    const difference = dateTarget - now;
-
-
-    if (difference <= 0) {
-
-        document.getElementById("days").innerText = "00";
-        document.getElementById("hours").innerText = "00";
-        document.getElementById("minutes").innerText = "00";
-        document.getElementById("seconds").innerText = "00";
-
-        document.querySelector(".countdown-title").innerHTML =
-            "💕 It's time!";
-
-        return;
-    }
-
-
-    const days =
-        Math.floor(difference / (1000 * 60 * 60 * 24));
-
-    const hours =
-        Math.floor(
-            (difference / (1000 * 60 * 60)) % 24
-        );
-
-    const minutes =
-        Math.floor(
-            (difference / (1000 * 60)) % 60
-        );
-
-    const seconds =
-        Math.floor(
-            (difference / 1000) % 60
-        );
-
-
-    document.getElementById("days").innerText =
-        String(days).padStart(2, "0");
-
-    document.getElementById("hours").innerText =
-        String(hours).padStart(2, "0");
-
-    document.getElementById("minutes").innerText =
-        String(minutes).padStart(2, "0");
-
-    document.getElementById("seconds").innerText =
-        String(seconds).padStart(2, "0");
-}
-
-
-updateCountdown();
-
-setInterval(updateCountdown, 1000);
-
-
-/* =====================================================
-   REASONS POPUP
-===================================================== */
-
-const reasonsBtn =
-    document.getElementById("reasonsBtn");
-
-const overlay =
-    document.getElementById("overlay");
-
-const closeBtn =
-    document.getElementById("closeBtn");
-
-
-reasonsBtn.addEventListener("click", () => {
-
-    overlay.style.display = "flex";
-
-});
-
-
-closeBtn.addEventListener("click", () => {
-
-    overlay.style.display = "none";
-
-});
-
-
-/* Close popup when clicking outside */
-
-overlay.addEventListener("click", (event) => {
-
-    if (event.target === overlay) {
-
-        overlay.style.display = "none";
-
-    }
-
-});
-
-
-/* =====================================================
-   YES BUTTON
-===================================================== */
-
-const yesBtn =
-    document.getElementById("yesBtn");
-
-
-yesBtn.addEventListener("click", () => {
-
-    createConfetti();
-
-    setTimeout(() => {
-
-        document.getElementById("mainCard").innerHTML = `
-
-            <div class="success">
-
-                <h1>
-                    YAAAY! 😭💖🎉
-                </h1>
-
-                <h2>
-                    I knew you had good taste 😌💕
-                </h2>
-
-                <p>
-                    You just made my day. 🥹🌸
-                </p>
-
-                <p>
-                    So it's a date then... 😘
-                </p>
-
-                <p>
-                    And I'm definitely saving that kiss. 💋❤️
-                </p>
-
-                <div style="
-                    font-size: 3rem;
-                    margin-top: 20px;
-                ">
-                    🥰💖🌸💋
-                </div>
-
+            <div class="reason">
+                🥹 You have this way of making me smile.
             </div>
-        `;
 
-    }, 500);
+            <div class="reason">
+                🌸 You're genuinely special to me.
+            </div>
 
-});
+            <div class="reason">
+                😂 You make ordinary moments feel fun.
+            </div>
+
+            <div class="reason">
+                💖 I just really enjoy being around you.
+            </div>
+
+            <div class="reason">
+                😘 And honestly... you're kinda kissable.
+            </div>
+
+            <button class="close-btn" id="closeBtn">
+                Okay, enough blushing 😭💕
+            </button>
+
+        </div>
+
+    </div>
 
 
-/* =====================================================
-   CONFETTI
-===================================================== */
+    <!-- ================= JAVASCRIPT ================= -->
 
-function createConfetti() {
+    <script>
 
-    const emojis = [
-        "💖",
-        "💕",
-        "💗",
-        "💓",
-        "💘",
-        "🌸",
-        "✨",
-        "🎉",
-        "🥰"
-    ];
+        /* =================================================
+           MUSIC PLAY / PAUSE
+        ================================================= */
+
+        const song = document.getElementById("loveSong");
+        const musicBtn = document.getElementById("musicBtn");
+
+        musicBtn.addEventListener("click", async () => {
+
+            try {
+
+                if (song.paused) {
+
+                    await song.play();
+
+                    musicBtn.textContent = "⏸️ Pause Music";
+
+                } else {
+
+                    song.pause();
+
+                    musicBtn.textContent = "🎵 Play Music";
+
+                }
+
+            } catch (error) {
+
+                console.error("Music could not play:", error);
+
+                musicBtn.textContent = "🎵 Tap to Play";
+
+            }
+
+        });
 
 
-    for (let i = 0; i < 100; i++) {
+        /* =================================================
+           MOVING NO BUTTON
+        ================================================= */
 
-        const piece =
-            document.createElement("div");
+        const noBtn = document.getElementById("noBtn");
 
-        piece.innerText =
-            emojis[
+        noBtn.addEventListener("mouseenter", moveNoButton);
+
+        noBtn.addEventListener("touchstart", moveNoButton);
+
+
+        function moveNoButton() {
+
+            noBtn.style.position = "fixed";
+
+            const maxX =
+                window.innerWidth - noBtn.offsetWidth - 20;
+
+            const maxY =
+                window.innerHeight - noBtn.offsetHeight - 20;
+
+            const x =
+                Math.max(10, Math.random() * maxX);
+
+            const y =
+                Math.max(10, Math.random() * maxY);
+
+            noBtn.style.left = x + "px";
+            noBtn.style.top = y + "px";
+        }
+
+
+        /* =================================================
+           COUNTDOWN
+        ================================================= */
+
+        const dateTarget =
+            new Date("2026-08-10T15:00:00+03:00").getTime();
+
+
+        function updateCountdown() {
+
+            const now =
+                new Date().getTime();
+
+            const difference =
+                dateTarget - now;
+
+
+            if (difference <= 0) {
+
+                document.getElementById("days").innerText = "00";
+                document.getElementById("hours").innerText = "00";
+                document.getElementById("minutes").innerText = "00";
+                document.getElementById("seconds").innerText = "00";
+
+                document.querySelector(".countdown-title").innerHTML =
+                    "💕 It's time!";
+
+                return;
+            }
+
+
+            const days =
                 Math.floor(
-                    Math.random() * emojis.length
-                )
+                    difference /
+                    (1000 * 60 * 60 * 24)
+                );
+
+
+            const hours =
+                Math.floor(
+                    (difference /
+                        (1000 * 60 * 60)) % 24
+                );
+
+
+            const minutes =
+                Math.floor(
+                    (difference /
+                        (1000 * 60)) % 60
+                );
+
+
+            const seconds =
+                Math.floor(
+                    (difference / 1000) % 60
+                );
+
+
+            document.getElementById("days").innerText =
+                String(days).padStart(2, "0");
+
+            document.getElementById("hours").innerText =
+                String(hours).padStart(2, "0");
+
+            document.getElementById("minutes").innerText =
+                String(minutes).padStart(2, "0");
+
+            document.getElementById("seconds").innerText =
+                String(seconds).padStart(2, "0");
+        }
+
+
+        updateCountdown();
+
+        setInterval(updateCountdown, 1000);
+
+
+        /* =================================================
+           REASONS POPUP
+        ================================================= */
+
+        const reasonsBtn =
+            document.getElementById("reasonsBtn");
+
+        const overlay =
+            document.getElementById("overlay");
+
+        const closeBtn =
+            document.getElementById("closeBtn");
+
+
+        reasonsBtn.addEventListener("click", () => {
+
+            overlay.style.display = "flex";
+
+        });
+
+
+        closeBtn.addEventListener("click", () => {
+
+            overlay.style.display = "none";
+
+        });
+
+
+        overlay.addEventListener("click", (event) => {
+
+            if (event.target === overlay) {
+
+                overlay.style.display = "none";
+
+            }
+
+        });
+
+
+        /* =================================================
+           YES BUTTON
+        ================================================= */
+
+        const yesBtn =
+            document.getElementById("yesBtn");
+
+
+        yesBtn.addEventListener("click", () => {
+
+            createConfetti();
+
+
+            setTimeout(() => {
+
+                document.getElementById("mainCard").innerHTML = `
+
+                    <div class="success">
+
+                        <h1>
+                            YAAAY! 😭💖🎉
+                        </h1>
+
+                        <h2>
+                            I knew you had good taste 😌💕
+                        </h2>
+
+                        <p>
+                            You just made my day. 🥹🌸
+                        </p>
+
+                        <p>
+                            So it's a date then... 😘
+                        </p>
+
+                        <p>
+                            And I'm definitely saving that kiss. 💋❤️
+                        </p>
+
+                        <div style="
+                            font-size: 3rem;
+                            margin-top: 20px;
+                        ">
+                            🥰💖🌸💋
+                        </div>
+
+                    </div>
+
+                `;
+
+            }, 500);
+
+        });
+
+
+        /* =================================================
+           CONFETTI
+        ================================================= */
+
+        function createConfetti() {
+
+            const emojis = [
+                "💖",
+                "💕",
+                "💗",
+                "💓",
+                "💘",
+                "🌸",
+                "✨",
+                "🎉",
+                "🥰"
             ];
 
-        piece.style.position = "fixed";
 
-        piece.style.left =
-            Math.random() * 100 + "vw";
+            for (let i = 0; i < 100; i++) {
 
-        piece.style.top = "-30px";
+                const piece =
+                    document.createElement("div");
 
-        piece.style.fontSize =
-            (15 + Math.random() * 20) + "px";
-
-        piece.style.zIndex = "200";
-
-        piece.style.pointerEvents = "none";
-
-        piece.style.transition =
-            "transform 3s linear, opacity 3s linear";
-
-        document.body.appendChild(piece);
+                piece.innerText =
+                    emojis[
+                        Math.floor(
+                            Math.random() *
+                            emojis.length
+                        )
+                    ];
 
 
-        setTimeout(() => {
+                piece.style.position = "fixed";
 
-            piece.style.transform =
-                `translateY(${window.innerHeight + 100}px)
-                 rotate(${Math.random() * 1000}deg)`;
+                piece.style.left =
+                    Math.random() * 100 + "vw";
 
-            piece.style.opacity = "0";
+                piece.style.top = "-30px";
 
-        }, 50);
+                piece.style.fontSize =
+                    (15 + Math.random() * 20) + "px";
 
+                piece.style.zIndex = "200";
 
-        setTimeout(() => {
+                piece.style.pointerEvents = "none";
 
-            piece.remove();
-
-        }, 3200);
-
-    }
-
-}
+                piece.style.transition =
+                    "transform 3s linear, opacity 3s linear";
 
 
-/* =====================================================
-   FLOATING HEARTS
-===================================================== */
-
-const heartTypes = [
-    "💖",
-    "💕",
-    "💗",
-    "💓",
-    "💘",
-    "🌸"
-];
+                document.body.appendChild(piece);
 
 
-function createHeart() {
+                setTimeout(() => {
 
-    const heart =
-        document.createElement("div");
+                    piece.style.transform =
+                        `translateY(${window.innerHeight + 100}px)
+                         rotate(${Math.random() * 1000}deg)`;
 
-    heart.className = "heart";
+                    piece.style.opacity = "0";
 
-    heart.innerText =
-        heartTypes[
-            Math.floor(
-                Math.random() * heartTypes.length
-            )
+                }, 50);
+
+
+                setTimeout(() => {
+
+                    piece.remove();
+
+                }, 3200);
+
+            }
+
+        }
+
+
+        /* =================================================
+           FLOATING HEARTS
+        ================================================= */
+
+        const heartTypes = [
+            "💖",
+            "💕",
+            "💗",
+            "💓",
+            "💘",
+            "🌸"
         ];
 
 
-    heart.style.left =
-        Math.random() * 100 + "vw";
+        function createHeart() {
+
+            const heart =
+                document.createElement("div");
+
+            heart.className = "heart";
+
+            heart.innerText =
+                heartTypes[
+                    Math.floor(
+                        Math.random() *
+                        heartTypes.length
+                    )
+                ];
 
 
-    heart.style.fontSize =
-        (15 + Math.random() * 25) + "px";
+            heart.style.left =
+                Math.random() * 100 + "vw";
 
 
-    const duration =
-        5 + Math.random() * 6;
-
-    heart.style.animationDuration =
-        duration + "s";
+            heart.style.fontSize =
+                (15 + Math.random() * 25) + "px";
 
 
-    document.body.appendChild(heart);
+            const duration =
+                5 + Math.random() * 6;
 
 
-    setTimeout(() => {
-
-        heart.remove();
-
-    }, duration * 1000);
-
-}
+            heart.style.animationDuration =
+                duration + "s";
 
 
-setInterval(createHeart, 500);
+            document.body.appendChild(heart);
 
 
-/* =====================================================
-   SPARKLES WHEN CLICKING
-===================================================== */
+            setTimeout(() => {
 
-document.addEventListener("click", (event) => {
+                heart.remove();
 
-    for (let i = 0; i < 3; i++) {
+            }, duration * 1000);
 
-        const sparkle =
-            document.createElement("div");
-
-        sparkle.className = "sparkle";
-
-        sparkle.innerText = "✨";
-
-        sparkle.style.left =
-            event.clientX +
-            (Math.random() * 40 - 20) +
-            "px";
-
-        sparkle.style.top =
-            event.clientY +
-            (Math.random() * 40 - 20) +
-            "px";
-
-        document.body.appendChild(sparkle);
+        }
 
 
-        setTimeout(() => {
+        setInterval(createHeart, 500);
 
-            sparkle.remove();
-
-        }, 2000);
-
-    }
-
-});
-
-</script>
+    </script>
 
 </body>
+
 </html>
+```
